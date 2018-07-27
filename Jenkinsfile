@@ -1,4 +1,4 @@
-#!/usr/bin/groovy
+#!groovy
 
 pipeline {
   agent none
@@ -12,6 +12,12 @@ pipeline {
       steps {
         sh 'mvn clean install'
       }
-    } 
+    }
+    stage('Docker Build') {
+      agent any
+      steps {
+        sh 'docker build -t gdmksys/spring-petclinic:latest .'
+      }
+    }
   }
 }
